@@ -1,4 +1,6 @@
 import 'package:complete_advanced_flutter/presentation/color_manager.dart';
+import 'package:complete_advanced_flutter/presentation/font_manager.dart';
+import 'package:complete_advanced_flutter/presentation/styles_manager.dart';
 import 'package:complete_advanced_flutter/presentation/values_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -27,9 +29,28 @@ ThemeData getApplicationTheme() {
         color: ColorManager.primary,
         elevation: AppSize.s4,
         shadowColor: ColorManager.primaryOpacity70,
-      )
+        titleTextStyle:
+            getRegularStyle(color: ColorManager.white, fontSize: FontSize.s16),
+      ),
 
       // Button theme
+      buttonTheme: ButtonThemeData(
+        shape: StadiumBorder(),
+        disabledColor: ColorManager.grey1,
+        buttonColor: ColorManager.primary,
+        splashColor: ColorManager.primaryOpacity70,
+      ),
+
+      // elevated button theme
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          textStyle: getRegularStyle(color: ColorManager.white),
+          primary: ColorManager.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSize.s12),
+          ),
+        ),
+      )
 
       // Text theme
 
