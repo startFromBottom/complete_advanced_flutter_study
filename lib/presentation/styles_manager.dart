@@ -43,7 +43,7 @@ TextStyle getSemiBoldStyle(
 
 // median bold text style
 
-TextStyle getMedianBoldStyle(
+TextStyle getMediumStyle(
     {double fontSize = FontSize.s12, required Color color}) {
   return _getTextStyle(
       fontSize, FontConstants.fontFamily, FontWeightManager.medium, color);
