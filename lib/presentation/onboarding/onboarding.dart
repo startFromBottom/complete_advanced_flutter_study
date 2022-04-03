@@ -47,7 +47,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
-        elevation: AppSize.s1_5,
+        backgroundColor: ColorManager.white,
+        elevation: AppSize.s0,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: ColorManager.white,
           statusBarBrightness: Brightness.dark,
@@ -104,6 +105,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             ),
             onTap: () {
               // go to next slide
+              _pageController.animateToPage(_getPreviousIndex(),
+                  duration: Duration(milliseconds: DurationConstant.d300),
+                  curve: Curves.bounceInOut);
             },
           ),
         ),
@@ -130,11 +134,31 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             ),
             onTap: () {
               // go to next slide
+              _pageController.animateToPage(_getNextIndex(),
+                  duration: Duration(milliseconds: DurationConstant.d300),
+                  curve: Curves.bounceInOut);
             },
           ),
         ),
       ],
     );
+  }
+
+  int _getPreviousIndex() {
+    int previousIndex = _currentIndex--;
+    if (previousIndex == -1) {
+      _currentIndex =
+          _list.length - 1; // infinite loop to go to the length of slider list
+    }
+    return _currentIndex;
+  }
+
+  int _getNextIndex() {
+    int nextIndex = _currentIndex++;
+    if (nextIndex >= _list.length) {
+      _currentIndex = 0; // infinite loop to go to first item inside the slider
+    }
+    return _currentIndex;
   }
 
   Widget _getProperCircle(int index) {
@@ -147,7 +171,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 }
 
 class OnBoardingPage extends StatelessWidget {
-  SliderObject _sliderObject;
+  final SliderObject _sliderObject;
 
   OnBoardingPage(this._sliderObject, {Key? key}) : super(key: key);
 
