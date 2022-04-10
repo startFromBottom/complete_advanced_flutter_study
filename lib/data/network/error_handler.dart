@@ -17,20 +17,48 @@ enum DataSource {
 class ReponseCode {
   // API status codes
   static const int SUCCESS = 200; // success with data
-  static const NO_CONTENT = 201; // success with no content
-  static const BAD_REQUEST = 400; // failure, api rejected the request
-  static const FORBIDDEN = 403; // failure, api rejected the request
-  static const UNAUTHORIZED = 401; // failure, user is not authorized
-  static const NOT_FOUND = 404; // failure, api url is not correct and not found
-  static const INTERNAL_SERVER_ERROR =
+  static const int NO_CONTENT = 201; // success with no content
+  static const int BAD_REQUEST = 400; // failure, api rejected the request
+  static const int FORBIDDEN = 403; // failure, api rejected the request
+  static const int UNAUTHORIZED = 401; // failure, user is not authorized
+  static const int NOT_FOUND =
+      404; // failure, api url is not correct and not found
+  static const int INTERNAL_SERVER_ERROR =
       500; // failure, crash happend in server side
 
   // local status code
-  static const UNKNOWN = -1;
-  static const CONNECT_TIMEOUT = -2; //
-  static const CANCEL = -3;
-  static const RECEIVE_TIMEOUT = -4;
-  static const SEND_TIMEOUT = -5;
-  static const CACHE_ERROR = -6;
-  static const NO_INTERNET_CONNECTION = -7;
+  static const int UNKNOWN = -1;
+  static const int CONNECT_TIMEOUT = -2; //
+  static const int CANCEL = -3;
+  static const int RECEIVE_TIMEOUT = -4;
+  static const int SEND_TIMEOUT = -5;
+  static const int CACHE_ERROR = -6;
+  static const int NO_INTERNET_CONNECTION = -7;
+}
+
+class ReponseMessage {
+  // API status codes
+  static const String SUCCESS = "success"; // success with data
+  static const String NO_CONTENT =
+      "success with no content"; // success with no content
+  static const String BAD_REQUEST =
+      "bad request, try agin later"; // failure, api rejected the request
+  static const String FORBIDDEN =
+      "forbidden request, try again later"; // failure, api rejected the request
+  static const String UNAUTHORIZED =
+      "user is not authorized, try again later"; // failure, user is not authorized
+  static const String NOT_FOUND =
+      "Uri is not found, try again later"; // failure, api url is not correct and not found
+  static const String INTERNAL_SERVER_ERROR =
+      "some thing went wrong, try again later"; // failure, crash happend in server side
+
+  // local status code
+  static const String UNKNOWN = "something went wrong, try again later";
+  static const String CONNECT_TIMEOUT = "time out error, try again later"; //
+  static const String CANCEL = "some thing went wrong, try again later";
+  static const String RECEIVE_TIMEOUT = "time out error, try again later";
+  static const String SEND_TIMEOUT = "time out error, try again later";
+  static const String CACHE_ERROR = "cache error, try again later";
+  static const String NO_INTERNET_CONNECTION =
+      "Please check your internet connection";
 }
