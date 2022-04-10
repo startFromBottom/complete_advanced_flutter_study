@@ -17,13 +17,13 @@ class Customer {
 class Contacts {
   String email;
   String phone;
-  int link;
+  String link;
 
   Contacts(this.email, this.phone, this.link);
 }
 
 class Authentication {
-  Customer customer;
-  Contacts contacts;
+  Customer? customer;
+  Contacts? contacts;
   Authentication(this.customer, this.contacts);
 }
