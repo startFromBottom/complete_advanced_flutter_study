@@ -61,7 +61,7 @@ class ResponseCode {
   static const int NOT_FOUND =
       404; // failure, api url is not correct and not found
   static const int INTERNAL_SERVER_ERROR =
-      500; // failure, crash happend in server side
+      500; // failure, crash happened in server side
 
   // local status code
   static const int UNKNOWN = -1;
