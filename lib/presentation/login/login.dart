@@ -112,10 +112,17 @@ class _LoginViewState extends State<LoginView> {
                     left: AppPadding.p28,
                     right: AppPadding.p28,
                   ),
-                  child: StreamBuilder(
-                    stream: ,  // todo add me later
-                    builder:  (context, snapshot) {
-                      return ElevatedButton(onPressed: () {}, child: Text(AppStrings.login),);
+                  child: StreamBuilder<bool>(
+                    stream: _viewModel.outputIsAllInputsValid,
+                    builder: (context, snapshot) {
+                      return ElevatedButton(
+                        onPressed: (snapshot.data ?? false)
+                            ? () {
+                                _viewModel.login();
+                              }
+                            : null,
+                        child: Text(AppStrings.login),
+                      );
                     },
                   ),
                 ),
