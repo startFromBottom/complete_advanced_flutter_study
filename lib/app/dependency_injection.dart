@@ -5,7 +5,10 @@ import 'package:complete_advanced_flutter/data/network/dio_factory.dart';
 import 'package:complete_advanced_flutter/data/network/network_info.dart';
 import 'package:complete_advanced_flutter/data/repository/repository_implementer.dart';
 import 'package:complete_advanced_flutter/domain/repository/repository.dart';
+import 'package:complete_advanced_flutter/domain/usecase/login_usecase.dart';
+import 'package:complete_advanced_flutter/presentation/login/login_viewmodel.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,4 +43,12 @@ Future<void> initAppModule() async {
   // repository
   instance.registerLazySingleton<Repository>(
       () => RepositoryImpl(instance(), instance()));
+}
+
+initLoginModule() {
+  if (!GetIt.I.isRegistered<LoginUseCase>()) {
+    // registerSingleton과 달리, 호출될 때마다 새로운 객체를 리턴.
+    instance.registerFactory<LoginUseCase>(() => LoginUseCase(instance()));
+    instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
+  }
 }
