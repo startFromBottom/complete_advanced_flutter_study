@@ -1,4 +1,11 @@
 import 'package:complete_advanced_flutter/app/app_prefs.dart';
+import 'package:complete_advanced_flutter/data/data_source/remote_data_source.dart';
+import 'package:complete_advanced_flutter/data/network/app_api.dart';
+import 'package:complete_advanced_flutter/data/network/dio_factory.dart';
+import 'package:complete_advanced_flutter/data/network/network_info.dart';
+import 'package:complete_advanced_flutter/data/repository/repository_implementer.dart';
+import 'package:complete_advanced_flutter/domain/repository/repository.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,4 +20,24 @@ Future<void> initAppModule() async {
   // app prefs instance
   instance
       .registerLazySingleton<AppPreferences>(() => AppPreferences(instance()));
+
+  // network info
+  instance.registerLazySingleton<NetworkInfo>(
+      () => NetworkInfoImpl(DataConnectionChecker()));
+
+  // dio factory
+  instance.registerLazySingleton<DioFactory>(() => DioFactory(instance()));
+
+  // app service client
+  final dio = await instance<DioFactory>().getDio();
+  // DioFactory는 등록했지만, Dio를 등록하지 않았기 때문에 dio 변수를 따로 선언해서 넣어 준다.
+  instance.registerLazySingleton<AppServiceClient>(() => AppServiceClient(dio));
+
+  // remote data source
+  instance.registerLazySingleton<RemoteDataSource>(
+      () => RemoteDataSourceImplementer(instance()));
+
+  // repository
+  instance.registerLazySingleton<Repository>(
+      () => RepositoryImpl(instance(), instance()));
 }
