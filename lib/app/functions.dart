@@ -20,6 +20,7 @@ Future<DeviceInfo> getDeviceInfoDetails() async {
       version = build.version.toString();
     } else if (Platform.isIOS) {
       // return ios device info
+      // TODO implement
     }
   } on PlatformException {
     // return default data here,
