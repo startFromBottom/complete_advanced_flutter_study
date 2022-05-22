@@ -1,3 +1,4 @@
+import 'package:complete_advanced_flutter/app/dependency_injection.dart';
 import 'package:complete_advanced_flutter/data/data_source/remote_data_source.dart';
 import 'package:complete_advanced_flutter/data/repository/repository_implementer.dart';
 import 'package:complete_advanced_flutter/domain/repository/repository.dart';
@@ -19,11 +20,14 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  RemoteDataSource _remoteDataSource =
-      RemoteDataSourceImplementer(_appServiceClient);
-  Repository _repository = RepositoryImpl(_remoteDataSource, _networkInfo);
-  LoginUseCase loginUseCase = LoginUseCase(_repository);
-  LoginViewModel _viewModel = LoginViewModel(loginUseCase);
+  // Dependency Injection을 사용하지 않는다면..
+  // RemoteDataSource _remoteDataSource =
+  //     RemoteDataSourceImplementer(_appServiceClient);
+  // Repository _repository = RepositoryImpl(_remoteDataSource, _networkInfo);
+  // LoginUseCase loginUseCase = LoginUseCase(_repository);
+  // LoginViewModel _viewModel = LoginViewModel(loginUseCase);
+
+  final LoginViewModel _viewModel = instance<LoginViewModel>();
 
   TextEditingController _userNameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
