@@ -1,10 +1,13 @@
+import 'package:complete_advanced_flutter/data/data_source/remote_data_source.dart';
+import 'package:complete_advanced_flutter/data/repository/repository_implementer.dart';
+import 'package:complete_advanced_flutter/domain/repository/repository.dart';
+import 'package:complete_advanced_flutter/domain/usecase/login_usecase.dart';
 import 'package:complete_advanced_flutter/presentation/login/login_viewmodel.dart';
 import 'package:complete_advanced_flutter/presentation/resources/assets_manager.dart';
 import 'package:complete_advanced_flutter/presentation/resources/color_manager.dart';
 import 'package:complete_advanced_flutter/presentation/resources/strings_manager.dart';
 import 'package:complete_advanced_flutter/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../resources/routes_manager.dart';
 
@@ -16,8 +19,11 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  LoginViewModel _viewModel =
-      LoginViewModel(null); // todo pass here login useCase
+  RemoteDataSource _remoteDataSource =
+      RemoteDataSourceImplementer(_appServiceClient);
+  Repository _repository = RepositoryImpl(_remoteDataSource, _networkInfo);
+  LoginUseCase loginUseCase = LoginUseCase(_repository);
+  LoginViewModel _viewModel = LoginViewModel(loginUseCase);
 
   TextEditingController _userNameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
